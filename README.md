@@ -1,5 +1,7 @@
 # Asahi-Quill
 
+![tests](https://github.com/navioski/asahi-quill/actions/workflows/tests.yml/badge.svg)
+
 <img src="assets/icon-128.png" width="96" align="right" alt="Asahi-Quill logo">
 
 A mouse-first text editor that runs in your terminal — click to place the caret,

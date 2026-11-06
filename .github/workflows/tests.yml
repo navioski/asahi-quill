@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  ansi:
+    name: ANSI frame verification (py${{ matrix.python }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.9 is the minimum claimed in the README — CI is the proof.
+        python: ["3.9", "3.11", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Replay ANSI output through the built-in terminal emulator
+        run: python tests/verify_ansi.py
+
+      - name: Byte-compile every source file
+        run: python -m compileall -q asahi-quill.py termui.py tests/
